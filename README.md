@@ -4,7 +4,7 @@
 
 Keeping your prometheus config files under source control is great for shared ownership of a monitoring system.  But you want to use a CI/CD system to make sure that nobody breaks monitoring by pushing an invalid config file.
 
-Prometheus has a nice utility called `promtool` which can be used to check that a config/rules file is valid.  But to use it, you need to build it yourself, or run it from the base prom/prometheus docker image which isn't compatible with the drone.io CI system because it runs as a custom user inside the container.
+Prometheus has a nice utility called [promtool](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/#syntax-checking-rules) which can be used to check that a config/rules file is valid.  But to use it, you need to build it yourself, or run it from the base prom/prometheus docker image which isn't compatible with the drone.io CI system because it runs as a custom user inside the container.
 
 We built this image to be lightweight, just alpine linux with the `promtool` binary, and nothing else.
 

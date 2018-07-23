@@ -21,7 +21,7 @@ Check a prometheus config file:
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  12a56a03c1dc \
+  dnanexus/promtool:1.0 \
   check config /tmp/prometheus.yml
 ```
 
@@ -30,7 +30,7 @@ Check a prometheus rules file
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  12a56a03c1dc \
+  dnanexus/promtool:1.0 \
   check rules /tmp/prometheus.rules.yml
 ```
 

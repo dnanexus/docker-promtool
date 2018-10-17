@@ -10,7 +10,7 @@ We built this image to be lightweight, just alpine linux with the `promtool` bin
 
 ## About this repo
 
-This repo just tracks changes to the Dockerfile.  The built image can be found at https://hub.docker.com/r/dnanexus/promtool/
+This repo just tracks changes to the Dockerfile.  The built image can be found at https://hub.docker.com/r/ricardoch/docker-promtool/
 
 ## Usage
 
@@ -21,7 +21,7 @@ Check a prometheus config file:
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  dnanexus/promtool:1.0 \
+  ricardoch/promtool:1.0 \
   check config /tmp/prometheus.yml
 ```
 
@@ -30,7 +30,7 @@ Check a prometheus rules file
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  dnanexus/promtool:1.0 \
+  ricardoch/promtool:1.0 \
   check rules /tmp/prometheus.rules.yml
 ```
 
@@ -39,10 +39,25 @@ docker run \
 ```
 pipeline:
   validate:
-    image: dnanexus/promtool:1.0
+    image: ricardoch/promtool:1.0
     commands:
       - promtool check rules prometheus.rules.yml
       - promtool check config prometheus.yml
+```
+
+### Using wercker pipeline step
+
+```
+validate-prometheus-config:
+  box:
+    id: ricardoch/promtool:1.0
+  steps:
+  - script:
+    name: Validate prometheus configuration rules (alerting rules)
+    description: if this is failing prometheus will not be able to start, better fail fast
+    code: |
+      promtool check config prometheus.yml
+      promtool check rules prometheus.rules.yml
 ```
 
 ## Version History

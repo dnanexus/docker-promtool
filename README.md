@@ -21,7 +21,7 @@ Check a prometheus config file:
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  ricardoch/promtool:1.0 \
+  ricardoch/promtool:2.9.2 \
   check config /tmp/prometheus.yml
 ```
 
@@ -30,7 +30,7 @@ Check a prometheus rules file
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  ricardoch/promtool:1.0 \
+  ricardoch/promtool:2.9.2 \
   check rules /tmp/prometheus.rules.yml
 ```
 
@@ -39,7 +39,7 @@ docker run \
 ```
 pipeline:
   validate:
-    image: ricardoch/promtool:1.0
+    image: ricardoch/promtool:2.9.2
     commands:
       - promtool check rules prometheus.rules.yml
       - promtool check config prometheus.yml
@@ -50,7 +50,7 @@ pipeline:
 ```
 validate-prometheus-config:
   box:
-    id: ricardoch/promtool:1.0
+    id: ricardoch/promtool:2.9.2
   steps:
   - script:
     name: Validate prometheus configuration rules (alerting rules)
@@ -62,4 +62,5 @@ validate-prometheus-config:
 
 ## Version History
 
+* 2.9.2: Alignment with prometheus releases
 * 1.0: Initial release

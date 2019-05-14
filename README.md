@@ -21,7 +21,7 @@ Check a prometheus config file:
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  dnanexus/promtool:1.0 \
+  dnanexus/promtool:2.9.2 \
   check config /tmp/prometheus.yml
 ```
 
@@ -30,7 +30,7 @@ Check a prometheus rules file
 ```
 docker run \
   -v /path/to/local/prometheus/configs:/tmp \
-  dnanexus/promtool:1.0 \
+  dnanexus/promtool:2.9.2 \
   check rules /tmp/prometheus.rules.yml
 ```
 
@@ -39,12 +39,28 @@ docker run \
 ```
 pipeline:
   validate:
-    image: dnanexus/promtool:1.0
+    image: dnanexus/promtool:2.9.2
     commands:
       - promtool check rules prometheus.rules.yml
       - promtool check config prometheus.yml
 ```
 
+### Using wercker pipeline step
+
+```
+validate-prometheus-config:
+  box:
+    id: dnanexus/promtool:2.9.2
+  steps:
+  - script:
+    name: Validate prometheus configuration rules (alerting rules)
+    description: if this is failing prometheus will not be able to start, better fail fast
+    code: |
+      promtool check config prometheus.yml
+      promtool check rules prometheus.rules.yml
+```
+
 ## Version History
 
+* 2.9.2: Alignment with prometheus releases
 * 1.0: Initial release

@@ -1,5 +1,5 @@
 
-PROM_VERSION=2.9.2
+PROM_VERSION=2.12.0
 DOCKER_IMAGE=dnanexus/promtool:${PROM_VERSION}
 
 .DEFAULT_GOAL := push
@@ -10,4 +10,4 @@ build:
 
 .PHONY: push
 push: build
-	docker push ${DOCKER_IMAGE} 
+	docker push ${DOCKER_IMAGE}
